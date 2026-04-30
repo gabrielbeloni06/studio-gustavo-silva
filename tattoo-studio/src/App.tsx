@@ -1,8 +1,16 @@
-import { useEffect, useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import React, { useEffect, useState, useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform, Variants } from 'framer-motion';
+
 import gustVideo from './assets/gust.mp4';
 import backVideo from './assets/back.mp4';
 import logo from './assets/logo.png';
+import contactBackVideo from './assets/back2.mp4'; 
+
+import destImg from './assets/dest.jpeg';
+import recImg from './assets/rec.png';
+import spaceImg from './assets/estudio.jpeg';
+import perfil from './assets/perfil.png';
+
 import img1 from './assets/img1.jpeg';
 import img2 from './assets/img2.jpeg';
 import img3 from './assets/img3.jpeg';
@@ -10,11 +18,7 @@ import img4 from './assets/img4.jpeg';
 import img5 from './assets/img5.jpeg';
 import img6 from './assets/img6.png';
 import img7 from './assets/img7.png';
-import perfil from './assets/perfil.png';
-import spaceImg from './assets/estudio.jpeg';
-import contactBackVideo from './assets/back2.mp4'; 
-import destImg from './assets/dest.jpeg';
-import recImg from './assets/rec.png';
+
 import gal1 from './assets/gal1.jpeg';
 import gal2 from './assets/gal2.jpeg';
 import gal3 from './assets/gal3.jpeg';
@@ -30,6 +34,7 @@ import gal12 from './assets/gal12.jpeg';
 import gal13 from './assets/gal13.jpeg';
 import gal14 from './assets/gal14.jpeg';
 import gal15 from './assets/gal15.jpeg';
+
 const heroElements = [
   { id: 1, src: img1, size: { width: '12rem', height: '16rem' }, top: "15vh", left: "10%", parallax: -150 },
   { id: 2, src: img2, size: { width: '14rem', height: '10rem' }, top: "35vh", left: "65%", parallax: 100 },
@@ -58,34 +63,32 @@ const galleryData = [
   { id: 15, src: gal15, type: 'geral' },
 ];
 
-
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 150, filter: "blur(20px)" },
   visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { type: "spring", stiffness: 50, damping: 15 } }
 };
 
-const titleVariants = {
+const titleVariants: Variants = {
   hidden: { opacity: 0, y: 50, filter: "blur(10px)" },
   visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { type: "spring", stiffness: 40, damping: 20, delay: 0.8 } }
 };
 
-
 function LeafletMap() {
-  const mapRef = useRef(null);
-  const mapInstanceRef = useRef(null);
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<any>(null);
 
   useEffect(() => {
     if (mapInstanceRef.current) return;
 
     const initMap = () => {
-      if (!window.L || !mapRef.current) return;
+      const L = (window as any).L; 
+      if (!L || !mapRef.current) return;
 
-      const L = window.L;
       const lat = -19.86997;
       const lng = -43.99384;
 
@@ -120,11 +123,12 @@ function LeafletMap() {
       mapInstanceRef.current = map;
     };
 
-    if (window.L) {
+    const L = (window as any).L;
+    if (L) {
       initMap();
     } else {
       const interval = setInterval(() => {
-        if (window.L) {
+        if ((window as any).L) {
           clearInterval(interval);
           initMap();
         }
@@ -152,10 +156,9 @@ function LeafletMap() {
   );
 }
 
-
-function Gallery({ onBack }) {
+function Gallery({ onBack }: { onBack: () => void }) {
   const [filter, setFilter] = useState('tudo');
-  const heroRef = useRef(null);
+  const heroRef = useRef<HTMLDivElement>(null);
 
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
@@ -172,7 +175,7 @@ function Gallery({ onBack }) {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!heroRef.current) return;
     const rect = heroRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;
@@ -188,7 +191,6 @@ function Gallery({ onBack }) {
   return (
     <div style={{ backgroundColor: '#050505', minHeight: '100vh', width: '100vw' }}>
       <style>{`
-        /* Títulos pesados e itálicos */
         .heavy-street-font {
           font-family: 'Impact', 'Arial Black', sans-serif;
           font-style: italic;
@@ -196,7 +198,6 @@ function Gallery({ onBack }) {
           text-transform: uppercase;
         }
 
-        /* Efeito Glitch / Ruído ao passar o mouse agressivamente */
         .glitch-effect {
           transition: filter 0.1s;
         }
@@ -214,7 +215,6 @@ function Gallery({ onBack }) {
           100% { transform: translate(0) skew(0deg); }
         }
 
-        /* Background de Ondas (Linhas) Animado */
         .wave-bg {
           position: absolute;
           inset: 0;
@@ -235,7 +235,6 @@ function Gallery({ onBack }) {
           100% { background-position: 0 -100px; }
         }
 
-        /* Layout Masonry */
         .masonry-grid {
           column-count: 3;
           column-gap: 1.5rem;
@@ -254,7 +253,6 @@ function Gallery({ onBack }) {
           position: relative;
         }
 
-        /* Imagem da Galeria com Efeito Hover */
         .gallery-img {
           width: 100%;
           display: block;
@@ -271,7 +269,6 @@ function Gallery({ onBack }) {
           z-index: 2;
         }
 
-        /* Filtros: Estilo Fita Adesiva (Duct Tape) */
         .tape-filter {
           position: relative;
           background: #d4d4d4;
@@ -293,7 +290,6 @@ function Gallery({ onBack }) {
           background: #fff;
         }
         
-        /* Filtro Ativo */
         .tape-filter.active {
           background: #000;
           color: #E31C1C;
@@ -440,13 +436,12 @@ function Gallery({ onBack }) {
   );
 }
 
-
 export default function App() {
   const [showGallery, setShowGallery] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [totalScroll, setTotalScroll] = useState(1);
   
-  const contactCardRef = useRef(null);
+  const contactCardRef = useRef<HTMLDivElement>(null);
 
   const xValue = useMotionValue(0);
   const yValue = useMotionValue(0);
@@ -472,7 +467,7 @@ export default function App() {
     return <Gallery onBack={() => setShowGallery(false)} />;
   }
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!contactCardRef.current) return;
     const rect = contactCardRef.current.getBoundingClientRect();
     const width = rect.width;
