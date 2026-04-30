@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hero-image {
+  transition: opacity 0.5s ease-out, filter 0.5s ease-out;
+}

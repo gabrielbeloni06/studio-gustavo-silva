@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-studio-dark: #000000;
+  --color-studio-accent: #E31C1C;
+}
+
+body {
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  @keyframes float-up-blur {
+    0% {
+      opacity: 0;
+      filter: blur(20px);
+      transform: translateY(150px);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0px);
+      transform: translateY(0);
+    }
+  }
+
+  .animate-float-up {
+    animation: float-up-blur 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
