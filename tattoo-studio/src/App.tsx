@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, Variants } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 
 import gustVideo from './assets/gust.mp4';
 import backVideo from './assets/back.mp4';
@@ -356,7 +357,7 @@ function Gallery({ onBack }: { onBack: () => void }) {
 
         <div style={{ position: 'absolute', zIndex: 2, textAlign: 'center', pointerEvents: 'none' }}>
           <h1 className="heavy-street-font" style={{ fontSize: 'clamp(5rem, 15vw, 15rem)', margin: 0, color: 'transparent', WebkitTextStroke: '2px rgba(255,255,255,0.1)' }}>
-            RUSS INK
+            STREET
           </h1>
         </div>
 
@@ -364,7 +365,7 @@ function Gallery({ onBack }: { onBack: () => void }) {
           className="glitch-effect"
           style={{
             position: 'absolute',
-            bottom: '-15vh',
+            bottom: '-15vh', 
             height: '135vh',
             x: fgX, y: fgY,
             zIndex: 3,
@@ -380,7 +381,7 @@ function Gallery({ onBack }: { onBack: () => void }) {
 
         <div style={{ position: 'absolute', bottom: '10%', left: '5%', zIndex: 4, pointerEvents: 'none' }}>
           <h2 className="heavy-street-font" style={{ fontSize: 'clamp(3rem, 6vw, 6rem)', margin: 0, lineHeight: 0.9 }}>
-            THE <br/> <span style={{ color: '#E31C1C' }}>GALERY</span>
+            THE <br/> <span style={{ color: '#E31C1C' }}>PORTFOLIO</span>
           </h2>
         </div>
       </section>
@@ -571,7 +572,7 @@ export default function App() {
             </div>
             <div style={{ position: 'relative', width: '100%', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#09090b', boxSizing: 'border-box', paddingTop: '3rem' }}>
               <div style={{ position: 'absolute', top: '-7rem', left: '50%', transform: 'translateX(-50%)', width: '14rem', height: '14rem', overflow: 'hidden', border: '1px solid #2a2a2a', zIndex: 60, boxShadow: '0 30px 80px rgba(0,0,0,0.95)' }}>
-                <img src={perfil} alt="Gustavo Silva" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)', transition: 'filter 0.6s ease' }} onMouseEnter={e => e.target.style.filter = 'grayscale(0%)'} onMouseLeave={e => e.target.style.filter = 'grayscale(100%)'} />
+                <img src={perfil} alt="Gustavo Silva" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%)', transition: 'filter 0.6s ease' }} onMouseEnter={e => (e.target as HTMLImageElement).style.filter = 'grayscale(0%)'} onMouseLeave={e => (e.target as HTMLImageElement).style.filter = 'grayscale(100%)'} />
               </div>
               <h3 style={{ margin: '0 0 0.5rem', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#ffffff' }}>Gustavo Silva</h3>
               <span style={{ display: 'block', width: '3rem', height: '1px', backgroundColor: '#E31C1C', marginBottom: '0.75rem' }} />
@@ -580,8 +581,8 @@ export default function App() {
               <button 
                 onClick={() => setShowGallery(true)}
                 style={{ border: '1px solid #2a2a2a', background: 'transparent', color: '#a1a1aa', padding: '0.85rem 3.5rem', fontSize: '0.75rem', letterSpacing: '0.25em', textTransform: 'uppercase', cursor: 'pointer', transition: 'all 0.4s ease' }} 
-                onMouseEnter={e => { e.target.style.background = 'white'; e.target.style.color = 'black'; e.target.style.borderColor = 'white'; }} 
-                onMouseLeave={e => { e.target.style.background = 'transparent'; e.target.style.color = '#a1a1aa'; e.target.style.borderColor = '#2a2a2a'; }}
+                onMouseEnter={e => { const t = e.target as HTMLButtonElement; t.style.background = 'white'; t.style.color = 'black'; t.style.borderColor = 'white'; }} 
+                onMouseLeave={e => { const t = e.target as HTMLButtonElement; t.style.background = 'transparent'; t.style.color = '#a1a1aa'; t.style.borderColor = '#2a2a2a'; }}
               >
                 Saiba Mais
               </button>
@@ -651,8 +652,8 @@ export default function App() {
                     width: '100%', height: '100%', objectFit: 'cover', 
                     filter: 'grayscale(100%) contrast(1.2)', transition: 'filter 0.5s ease' 
                   }} 
-                  onMouseEnter={e => e.target.style.filter = 'grayscale(0%) contrast(1.1)'}
-                  onMouseLeave={e => e.target.style.filter = 'grayscale(100%) contrast(1.2)'}
+                  onMouseEnter={e => (e.target as HTMLImageElement).style.filter = 'grayscale(0%) contrast(1.1)'}
+                  onMouseLeave={e => (e.target as HTMLImageElement).style.filter = 'grayscale(100%) contrast(1.2)'}
                 />
                 <div style={{ position: 'absolute', bottom: '-20px', left: '-20px', backgroundColor: '#fff', color: '#000', padding: '0.5rem 1rem', fontFamily: 'monospace', fontWeight: 'bold', border: '2px solid #000', textTransform: 'uppercase', fontSize: '0.75rem' }}>
                   STUDIO. 2026 // BH
