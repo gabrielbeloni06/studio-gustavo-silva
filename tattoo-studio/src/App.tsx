@@ -357,7 +357,7 @@ function Gallery({ onBack }: { onBack: () => void }) {
 
         <div style={{ position: 'absolute', zIndex: 2, textAlign: 'center', pointerEvents: 'none' }}>
           <h1 className="heavy-street-font" style={{ fontSize: 'clamp(5rem, 15vw, 15rem)', margin: 0, color: 'transparent', WebkitTextStroke: '2px rgba(255,255,255,0.1)' }}>
-            STREET
+            RUSS INK
           </h1>
         </div>
 
@@ -381,7 +381,7 @@ function Gallery({ onBack }: { onBack: () => void }) {
 
         <div style={{ position: 'absolute', bottom: '10%', left: '5%', zIndex: 4, pointerEvents: 'none' }}>
           <h2 className="heavy-street-font" style={{ fontSize: 'clamp(3rem, 6vw, 6rem)', margin: 0, lineHeight: 0.9 }}>
-            THE <br/> <span style={{ color: '#E31C1C' }}>PORTFOLIO</span>
+            THE <br/> <span style={{ color: '#E31C1C' }}>GALERY</span>
           </h2>
         </div>
       </section>
